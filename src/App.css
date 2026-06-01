@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* MAIN CONTAINER */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.container {
+  height: 100vh;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+/* BOTTOM BUTTONS */
+
+.bottom-buttons {
+
+  position: absolute;
+
+  bottom: 50px;
+
+  display: flex;
+
+  gap: 30px;
+}
+
+/* MODERN BUTTON */
+
+.explore-btn {
+
+  padding: 18px 42px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  color: white;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  gap: 14px;
+
+  cursor: pointer;
+
+  min-width: 240px;
+
+  border: 1px solid rgba(255,255,255,0.28);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.18),
+    inset 0 1px 1px rgba(255,255,255,0.18);
+
+  transition: all 0.35s ease;
 }
 
-.App-link {
-  color: #61dafb;
+/* HOVER EFFECT */
+
+.explore-btn:hover {
+
+  transform: translateY(-6px) scale(1.04);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.28),
+    rgba(255,255,255,0.14)
+  );
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,0.25),
+    inset 0 1px 1px rgba(255,255,255,0.25);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* CLICK EFFECT */
+
+.explore-btn:active {
+
+  transform: scale(0.96);
 }
