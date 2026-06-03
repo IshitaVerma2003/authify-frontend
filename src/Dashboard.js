@@ -8,7 +8,7 @@ function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [selectedProject, setSelectedProject] = useState("Overall");
 
-  const API = process.env.REACT_APP_API_URL || "http://localhost:8080";
+  const API = process.env.REACT_APP_API_URL;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {

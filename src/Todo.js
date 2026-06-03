@@ -42,17 +42,16 @@ function Todo() {
 
     try {
 
-      const response = await fetch("http://localhost:8080/tasks", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(task),
-
-      });
+      const response = await fetch(
+  `${process.env.REACT_APP_API_URL}/tasks`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  }
+);
 
       const data = await response.json();
 

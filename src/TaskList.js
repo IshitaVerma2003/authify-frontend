@@ -6,7 +6,7 @@ function TaskList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/tasks")
+    fetch(`${process.env.REACT_APP_API_URL}/tasks`)
       .then((res) => res.json())
       .then((data) => {
         console.log("TASK DATA:", data);
