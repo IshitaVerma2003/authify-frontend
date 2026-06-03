@@ -1,9 +1,19 @@
-// imports unchanged
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSignInAlt, FaUserPlus, FaEnvelope, FaLock, FaUser, FaPhone } from "react-icons/fa";
+import {
+  FaSignInAlt,
+  FaUserPlus,
+  FaEnvelope,
+  FaLock,
+  FaUser,
+  FaPhone,
+} from "react-icons/fa";
 import bgVideo from "./assets/bg.mp4";
 import "./Auth.css";
+
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  "https://authify-backend-0ilf.onrender.com";
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false);
@@ -25,18 +35,20 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/register", {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, phone, email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          phone,
+          email,
+          password,
+        }),
       });
 
-      let data = {};
-      try {
-        data = await res.json();
-      } catch {
-        data = {};
-      }
+      const data = await res.json();
 
       if (res.ok) {
         setMessage("Registered Successfully ✅");
@@ -45,11 +57,12 @@ export default function Login() {
           localStorage.setItem("token", data.token);
         }
 
-       navigate("/dashboard")
+        navigate("/dashboard");
       } else {
-        setMessage(data.message || "Not Registered ❌");
+        setMessage(data.message || "Registration Failed ❌");
       }
     } catch (error) {
+      console.error(error);
       setMessage("Server Error ❌");
     }
   };
@@ -66,32 +79,32 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       });
-      console.log("Login response status:", res.status);
-      let data = {};
-      try {
-        data = await res.json();
-      } catch {
-        data = {};
-      }
+
+      const data = await res.json();
 
       if (res.ok) {
-        console.log("Login successful:");
         setMessage("Signed In Successfully ✅");
 
         if (data.token) {
           localStorage.setItem("token", data.token);
         }
-        console.log("Navigating to /todo");
-        navigate("/dashboard")
+
+        navigate("/dashboard");
       } else {
         setMessage(data.message || "Login Failed ❌");
       }
     } catch (error) {
+      console.error(error);
       setMessage("Server Error ❌");
     }
   };
@@ -104,7 +117,6 @@ export default function Login() {
 
       <div className="overlay">
         <div className="auth-card">
-
           <div className="toggle-buttons">
             <button
               onClick={() => {
@@ -131,8 +143,7 @@ export default function Login() {
 
           {!isRegister ? (
             <form onSubmit={handleLogin}>
-        
-             <h2>Sign In</h2>
+              <h2>Sign In</h2>
 
               <div className="input-box">
                 <FaEnvelope className="icon email" />
@@ -177,7 +188,6 @@ export default function Login() {
               </button>
             </form>
           )}
-
         </div>
       </div>
     </div>
